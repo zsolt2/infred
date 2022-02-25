@@ -1,0 +1,58 @@
+<h1>hello world</h1>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>{{company}}</h2>
+           <p>{{description}}</p>
+           <h5>Jelentkezesek</h5>
+            <ul>
+                <li *ngFor="let applicant of applicants" [class]="{
+                    'text-danger': isOutlier(applicant)
+                }">
+                    {{applicant.name}}, {{applicant.age}} eves {{applicant.role}}
+                    {{applicant.education}}, {{applicant.desiredSalary}} Ft
+                    <button class="btn btn-sm btn-danger" (click)="deleteApplicant(applicant)">Delete</button>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="col-md-6">
+            <button class="btn btn-sm btn-success" (click)="showForm()" *ngIf="!isFormVisible">Uj jelentkezes</button>
+            <form *ngIf="isFormVisible" (ngSubmit)="addApplicant()">
+                <div class="mb-3">
+                  <input type="text" class="form-control" id="id" name="id" hidden [(ngModel)]="newApplicant.id">
+                </div>
+                <div class="mb-3">
+                  <label for="name" class="form-label">Full name</label>
+                  <input type="text" class="form-control" id="name" name="name" [(ngModel)]="newApplicant.name">
+                </div>
+                <div class="mb-3">
+                  <label for="age" class="form-label">Age</label>
+                  <input type="text" class="form-control" id="age" name="age"  [(ngModel)]="newApplicant.age">
+                </div>
+                <div class="mb-3">
+                  <label for="role" class="form-label">Role</label>
+                  <input type="text" class="form-control" id="role" name="role" [(ngModel)]="newApplicant.role">
+                </div>
+                <div class="mb-3">
+                  <label for="education" class="form-label">Education</label>
+                  <select class="form-select" id="education" name="education"  [(ngModel)]="newApplicant.education">
+                    <option value="középiskola">középiskola</option>
+                    <option value="BSc">BSc</option>
+                    <option value="MSc">MSc</option>
+                    <option value="PhD">PhD</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="salary" class="form-label">Desired Salary</label>
+                  <input type="number" class="form-control" id="salary" name="salary" [(ngModel)]="newApplicant.desiredSalary">
+                </div>
+                <button class="btn btn-sm btn-primary" (click)="addApplicant()">
+                  Add
+                </button>
+              </form>
+                    </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+services:
+  job_app:
+    container_name: job_app_container
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - nodeVersion=latest
+    volumes:
+      - '.:/angular'
+    ports:
+      - '127.0.0.1:4200:4200'
